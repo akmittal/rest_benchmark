@@ -64,6 +64,7 @@ func createMovie(client *ent.Client) http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		w.Write([]byte(movie.Name))
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(movie)
 	}
 }

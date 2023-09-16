@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import { Hono } from "hono";
-const app = new Hono({});
+const app = new Hono();
 
 const prisma = new PrismaClient();
 
 app.get("/movie", async (c) => {
-  let limit = c.req.query("limit") ? Number(c.req.query("limit")) : 100;
+  let limit = c.req.query("limit") ? Number(c.req.query("limit")) : 1000;
   return c.json(await prisma.movie.findMany({ take: limit }));
 });
 
